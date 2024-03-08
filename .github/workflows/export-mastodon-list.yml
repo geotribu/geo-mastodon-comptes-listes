@@ -10,20 +10,25 @@ jobs:
   run:
 
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
 
-      - name: set up Python
+      - name: Set up Python
         uses: actions/setup-python@v5.0.0
         with:
-          python-version: 3.10
+          python-version: 3.12
 
-      - name: install dependencies
-        run: python -m pip install geotribu ghp-import
+      - name: Install dependencies
+        # TODO: extra for mastodon only
+        run: python -m pip install geotribu[all]
 
-      - name: export geotribu's mastodon lists and accounts
-        run: geotribu social mastodon-export -w ./export-mastodon
+      - name: Export geotribu's mastodon lists and accounts
+        run: mkdir mastodon && geotribu social mastodon-export -w mastodon/export-mastodon
 
-      - name: deploy to GitHub Pages
-        run: ghp-import --force --no-history --no-jekyll --push export-mastodon
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "mastodon/export-mastodon"
