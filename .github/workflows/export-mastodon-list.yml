@@ -16,6 +16,12 @@ env:
   LC_ALL: "fr_FR.UTF-8"
   LC_TIME: "fr_FR.UTF-8"
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+
+  
 jobs:
 
   run:
