@@ -43,4 +43,4 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "mastodon/export-mastodon
+          path: mastodon/export-mastodon
