@@ -1,4 +1,4 @@
-name: Export geotribu mastodon accounts and lists
+name: "💾 Export Geotribu Mastodon accounts and lists"
 
 on:
   pull_request:
@@ -19,7 +19,7 @@ env:
 jobs:
 
   run:
-
+    name: Export des données du compte Geotribu sur Github Pages
     runs-on: ubuntu-latest
 
     steps:
