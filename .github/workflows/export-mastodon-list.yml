@@ -1,6 +1,9 @@
 name: Export geotribu mastodon accounts and lists
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "0 5 * * SUN"  # weekly on sundays
   workflow_dispatch:     # to trigger manually
@@ -31,4 +34,4 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "mastodon/export-mastodon"
+          path: "mastodon/export-mastodon
