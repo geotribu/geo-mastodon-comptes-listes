@@ -8,6 +8,11 @@ on:
     - cron: "0 5 * * SUN"  # weekly on sundays
   workflow_dispatch:     # to trigger manually
 
+env:
+  LANG: "fr_FR.UTF-8"
+  LC_ALL: "fr_FR.UTF-8"
+  LC_TIME: "fr_FR.UTF-8"
+
 jobs:
 
   run:
