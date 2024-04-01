@@ -58,7 +58,7 @@ jobs:
           geotribu social mastodon-export -w mastodon/export-mastodon
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
         if: github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main')
 
       - name: Generate Directory Listings
