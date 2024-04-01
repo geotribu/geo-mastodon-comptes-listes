@@ -71,13 +71,13 @@ jobs:
       - name: Generate Directory Listings
         uses: jayanta525/github-pages-directory-listing@v4.0.0
         with:
-          FOLDER: mastodon/export-mastodon/
+          FOLDER: export/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         if: github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main')
         with:
-          path: mastodon/export-mastodon/
+          path: export/
   
       - name: Deploy to GitHub Pages
         id: deployment
