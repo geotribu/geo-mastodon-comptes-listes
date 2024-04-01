@@ -28,7 +28,7 @@ jobs:
   run:
     name: Export des données du compte Geotribu sur Github Pages
     runs-on: ubuntu-latest
-    if: github.repository == 'geotribu/geo-mastodon-comptes-listes/'
+    if: github.repository == 'geotribu/geo-mastodon-comptes-listes'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
