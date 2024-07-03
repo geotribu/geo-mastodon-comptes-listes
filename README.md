@@ -4,7 +4,7 @@
 
 This project aims to automate the export of Mastodon lists and followed accounts to CSV format, ensuring simplified data retrieval and periodic storage. Generated files are published on GitHub Pages <https://geotribu.github.io/geo-mastodon-comptes-listes/>.
 
-![Mastodon export - File explorer result](https://cdn.geotribu.fr/img/articles-blog-rdp/articles/2024/transition_mastodon/mastodon_lists_explorer.webp)
+![Mastodon export - File explorer result](https://cdn.geotribu.fr/img/articles-blog-rdp/articles/2024/transition_mastodon/mastodon_lists_explorer.png)
 
 There is no real logic code here, only CI/CD (YAML) workflow which is run monthly or manually.  
 Under the hood, it's just the [geotribu cli](https://pypi.org/project/geotribu/)
@@ -15,10 +15,10 @@ Under the hood, it's just the [geotribu cli](https://pypi.org/project/geotribu/)
 
 ### Locally
 
-1. Install the geotribu CLI:
+> [!NOTE]
+> [pipx](https://pipx.pypa.io/) is a modern tool that make it simpler to install and perform common post-install operations (as registering the CLI in your PATH, etc.)
 
-    > ![NOTE]
-    > [pipx](https://pipx.pypa.io/) is a modern tool that make it simpler to install and perform common post-install operations (as registering the CLI in your PATH, etc.)
+1. Install the geotribu CLI:
 
     ```sh
     pipx install 'geotribu>=0.32'
