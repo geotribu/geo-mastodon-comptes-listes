@@ -9,7 +9,9 @@ This project aims to automate the export of Mastodon lists and followed accounts
 There is no real logic code here, only CI/CD (YAML) workflow which is run monthly or manually.  
 Under the hood, it's just the [geotribu cli](https://pypi.org/project/geotribu/)
 
-----
+## How to import lists and accounts
+
+This project is a follow-up of the article [Mastodon: how to export lists and accounts](https://geotribu.fr/articles/2024/transition-mastodon/) (in French, but [Firefox Translate](https://support.mozilla.org/en-US/kb/website-translation) is your friend) where the rationale behind and how to import files is described.
 
 ## How to use it with your Mastodon account
 
