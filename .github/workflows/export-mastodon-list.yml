@@ -8,8 +8,8 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 5 * * SUN"  # weekly on sundays
-  workflow_dispatch:     # to trigger manually
+    - cron: "0 5 * * SUN" # weekly on sundays
+  workflow_dispatch: # to trigger manually
 
 env:
   LANG: "fr_FR.UTF-8"
@@ -22,21 +22,16 @@ permissions:
   id-token: write
   pages: write
 
-  
 jobs:
-
-  run:
-    name: Export des données du compte Geotribu sur Github Pages
+  export:
+    name: Export des données du compte Mastodon de Geotribu
     runs-on: ubuntu-latest
     if: github.repository == 'geotribu/geo-mastodon-comptes-listes'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Get source code
         uses: actions/checkout@v6
-      
+
       - name: Set up Python
         uses: actions/setup-python@v6.1.0
         with:
@@ -45,7 +40,6 @@ jobs:
           python-version: 3.12
 
       - name: Install dependencies
-        # TODO: extra for mastodon only
         run: |
           python -m pip install -U pip setuptools wheel
           python -m pip install -U -r requirements.txt
@@ -56,31 +50,42 @@ jobs:
         run: |
           geotribu social mastodon-export -w export/
 
+      - name: Generate Directory Listings
+        uses: jayanta525/github-pages-directory-listing@v4.0.0
+        with:
+          FOLDER: export/
+
       - name: Save build doc as artifact
         uses: actions/upload-artifact@v5
         with:
           name: export-mastodon
           path: export/
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 15
 
+  deploy:
+    name: 📤 Deploy to GitHub Pages
+    needs: export
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: export-mastodon
+          path: export/
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-      - name: Generate Directory Listings
-        uses: jayanta525/github-pages-directory-listing@v4.0.0
-        with:
-          FOLDER: export/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           path: export/
-  
+
       - name: Deploy to GitHub Pages
         id: deployment
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/deploy-pages@v4
-  
