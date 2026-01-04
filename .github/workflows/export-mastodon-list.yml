@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   export:
-    name: Export des données du compte Mastodon de Geotribu
+    name: 📑 Export data
     runs-on: ubuntu-latest
     if: github.repository == 'geotribu/geo-mastodon-comptes-listes'
 
