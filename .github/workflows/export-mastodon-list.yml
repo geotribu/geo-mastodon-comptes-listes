@@ -45,10 +45,17 @@ jobs:
           python -m pip install -U -r requirements.txt
 
       - name: Export geotribu's mastodon lists and accounts
+        if: github.actor != 'dependabot[bot]'
         env:
           GEOTRIBU_MASTODON_API_ACCESS_TOKEN: ${{ secrets.GEOTRIBU_MASTODON_API_ACCESS_TOKEN }}
         run: |
           geotribu social mastodon-export -w export/
+
+      - name: Create dummy export for Dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: |
+          mkdir -p export/
+          echo "Dependabot test run" > export/README.txt
 
       - name: Generate Directory Listings
         uses: jayanta525/github-pages-directory-listing@v4.0.0
