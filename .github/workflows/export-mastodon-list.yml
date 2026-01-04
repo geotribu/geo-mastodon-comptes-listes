@@ -63,7 +63,7 @@ jobs:
           FOLDER: export/
 
       - name: Save build doc as artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: export-mastodon
           path: export/
